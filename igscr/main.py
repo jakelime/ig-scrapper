@@ -36,10 +36,11 @@ class InstagramBot:
 
 def main(user_to_watch: str = "outpostclimbing"):
     bot = InstagramBot()
+    bot.ig.load_session_from_file(username=IG_USER, filename=bot.session_file)
 
+    print("Starting to Instagram watcher...")
+    print(f" -- monitoring '{user_to_watch}'")
     while True:
-        print("Starting to Instagram watcher...")
-        print(f" -- monitoring '{user_to_watch}'")
         posts_iterator = instaloader.Profile.from_username(
             bot.ig.context, user_to_watch
         ).get_posts()
@@ -50,7 +51,6 @@ def main(user_to_watch: str = "outpostclimbing"):
         else:
             notify()
             print(f"UPDATED!!! {latest_post.date=}")
-
         time.sleep(SLEEP_INTERVAL)
 
 
