@@ -34,12 +34,14 @@ class InstagramBot:
         self.ig.save_session_to_file(self.session_file)
 
 
-def main():
+def main(user_to_watch: str = "outpostclimbing"):
     bot = InstagramBot()
 
     while True:
+        print("Starting to Instagram watcher...")
+        print(f" -- monitoring '{user_to_watch}'")
         posts_iterator = instaloader.Profile.from_username(
-            bot.ig.context, "outpostclimbing"
+            bot.ig.context, user_to_watch
         ).get_posts()
         latest_post = next(posts_iterator)
 
